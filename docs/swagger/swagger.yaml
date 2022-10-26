@@ -1,0 +1,439 @@
+definitions:
+  app.ResponseNG:
+    properties:
+      code:
+        type: integer
+      msg:
+        type: string
+      status:
+        type: boolean
+    type: object
+  app.ResponseOk:
+    properties:
+      data:
+        type: object
+      status:
+        type: boolean
+    type: object
+info:
+  contact: {}
+  title: Golang Gin API
+  version: "1.0"
+paths:
+  /account/register:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Register new account
+  /account/verify/:token:
+    get:
+      parameters:
+      - description: Token
+        in: path
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Active new user
+  /auth:
+    post:
+      parameters:
+      - description: email
+        in: query
+        name: email
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Create key to login
+  /auth/:id:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Create user token
+  /partners:
+    get:
+      parameters:
+      - description: Token
+        in: path
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Get all partner of user
+    post:
+      parameters:
+      - description: Name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: Bank account
+        in: query
+        name: bank_account
+        required: true
+        type: string
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: Email
+        in: query
+        name: email
+        required: true
+        type: string
+      - description: Phone
+        in: query
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Register new partner
+    put:
+      parameters:
+      - description: Name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: Bank account
+        in: query
+        name: bank_account
+        required: true
+        type: string
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: Email
+        in: query
+        name: email
+        required: true
+        type: string
+      - description: Phone
+        in: query
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Store edition partner
+  /partners/:id:
+    delete:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Delete a partner
+  /statistic/:id:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Get details report
+  /transactions:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Get all transactions of user
+    post:
+      parameters:
+      - description: Partner Id
+        in: path
+        name: partner_id
+        type: string
+      - description: Bank Id
+        in: path
+        name: bank_id
+        type: string
+      - description: Bank branch Id
+        in: path
+        name: bank_branch_id
+        type: string
+      - description: Amount
+        in: path
+        name: amount
+        type: integer
+      - description: Fee
+        in: path
+        name: fee
+        type: integer
+      - description: Message
+        in: path
+        name: message
+        type: string
+      - description: Currency
+        in: path
+        name: currency
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Register new transaction
+  /transactions/:id:
+    delete:
+      parameters:
+      - description: Transaction Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Delete a transaction
+    get:
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Get transaction details
+    put:
+      parameters:
+      - description: Transaction Id
+        in: path
+        name: id
+        type: string
+      - description: Partner Id
+        in: path
+        name: partner_id
+        type: string
+      - description: Bank Id
+        in: path
+        name: bank_id
+        type: string
+      - description: Bank branch Id
+        in: path
+        name: bank_branch_id
+        type: string
+      - description: Amount
+        in: path
+        name: amount
+        type: integer
+      - description: Fee
+        in: path
+        name: fee
+        type: integer
+      - description: Message
+        in: path
+        name: message
+        type: string
+      - description: Currency
+        in: path
+        name: currency
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Store edition transaction
+  /transactions/search/:start_date/:end_date:
+    get:
+      parameters:
+      - description: Start date
+        in: path
+        name: start_date
+        required: true
+        type: string
+      - description: End date
+        in: path
+        name: end_date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Search transaction
+  /transactions/status/:id/:status:
+    post:
+      parameters:
+      - description: Transaction Id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Status (0-Create; 1-Pending; 2-Success)
+        in: path
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Update transaction status
+  /upload:
+    post:
+      parameters:
+      - description: image
+        in: path
+        name: image
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ResponseOk'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ResponseNG'
+      summary: Import Image
+swagger: "2.0"
